@@ -1,0 +1,32 @@
+	body,html{
+		padding: 0;
+		margin: 0;
+		scroll-behavior: smooth;
+
+	}
+	
+	#page1, #page2{
+		width: 100%;
+		height: 100%;
+		background-color: white;
+	}
+
+	.bg-orange {
+		background-color: orange;
+	}
+	
+	#brand {
+		padding-right: 70%;
+	}
+
+	.navbar-toggler{
+		margin-left: 90%;
+	}
+
+	.nav-item{
+		margin-left: 85%;
+	}
+
+	p,h1,h2,h3{
+		font-family: 'PT Sans Caption', sans-serif;
+	}

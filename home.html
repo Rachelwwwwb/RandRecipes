@@ -1,0 +1,377 @@
+<html>
+<head>
+<title></title>	
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="common.css">
+<link href="https://fonts.googleapis.com/css?family=Arapey|Cinzel" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans+Caption" rel="stylesheet">
+
+<style type="text/css">
+	p,h1,h2,h3{
+		font-family: 'PT Sans Caption', sans-serif;
+	}
+	#rolling {
+		width: 100%;
+		margin-top: 5%;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		text-align: center;
+		display:none;
+	}
+	#not-rolling {
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 10%;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		text-align: center;
+		padding-bottom: 20%;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+
+	}
+
+
+	#stop {
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: rgba(97,97,97,0.1);
+		border-color: white;
+		border-radius: 20px;
+		color: black;
+		line-height: 1;
+		font-family: 'PT Sans Caption', sans-serif;
+
+	}
+
+	#rolling p{
+		font-size: 30px;
+		line-height: 10px;
+	}
+	#rolling big{
+		font-size: 80px;
+	}
+	#rolling p2{
+		font-size: 50px;
+		line-height: 10px;
+	}
+	#more-link{
+		text-align: center;
+		margin-top: 5vh;
+		 animation: arrow 700ms linear infinite;
+	}
+
+	#radio {
+		line-height: 2;
+		width: 85%;
+		margin-left: auto;
+		margin-right: auto;
+		font-family: 'PT Sans Caption', sans-serif;
+
+	}
+	.options {
+		width: 75%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#section2{
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#option-submit {
+		width: 20%;
+		margin-left: 40%;
+		margin-right: 40%;
+		background-color: rgba(97,97,97,0.1);
+		border-color: white;
+		border-radius: 20px;
+		color: black;
+		line-height: 1;
+	}
+
+	#identity {
+		cursor: pointer;
+	}
+
+	#main-pic {
+		width: 25%;
+		margin-left: 32.5%;
+		margin-right: 32.5%;
+		padding-bottom: 20px;
+	}
+
+	#section2 {
+		width: 80%;
+		height: 80%;
+		margin-top: 10%;
+		margin-left:auto;
+		margin-right: auto;
+		border-style: solid;
+		border-radius: 50px; 
+	}
+
+	.col-sm {
+		border-style: solid;
+		border-radius: 50px; 
+	}
+
+</style>
+
+</head>
+<!-- ID: 3e327f96 -->
+<!-- KEY: b5e7f5bbf288c60fa2f17db649d9ded0 -->
+<!-- "https://api.edamam.com/search?q=chicken&app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&from=0&to=3&calories=591-722&health=alcohol-free" -->
+<body>
+<div id="page1">
+	<!-- header -->
+<nav class="navbar navbar-expand-lg navbar-light bg-orange">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a id="brand" class="navbar-brand" href="#">Navbar</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+	<div id="first-page">
+		<div id="not-rolling">
+			<h2>I WHAT TO EAT</h2>
+		</div>
+		<div id="rolling">
+			<h1>I want to eat</h1>
+			<img id="main-pic" src="https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg" />
+			<h3><h2 id="identity"></h2></h3> <br />
+			<button type="button" id="stop" class="btn btn-outline-primary">Find out your recipe of the day...</button>
+		</div>
+		<!-- several radio boxes for choosing -->
+		<div id="radio">
+
+		<div class="options">
+			Allergies options:&nbsp&nbsp
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="dairy-free">
+	  			<label class="form-check-label" for="inlineCheckbox1">dairy-free</label>
+			</div>
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="egg-free">
+	  			<label class="form-check-label" for="inlineCheckbox2">egg-free</label>
+			</div>
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="gluten-free">
+	  			<label class="form-check-label" for="inlineCheckbox2">gluten-free</label>
+			</div>
+
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="peanut-free">
+	  			<label class="form-check-label" for="inlineCheckbox2">peanut-free	</label>
+			</div>
+
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="sesame-free">
+	  			<label class="form-check-label" for="inlineCheckbox2">sesame-free</label>
+			</div>
+
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="wheat-free">
+	  			<label class="form-check-label" for="inlineCheckbox2">wheat-free</label>
+			</div>
+
+		</div>
+		<form action="*" method="GET" id="option-form">
+		<div class="options">
+			Health choices:&nbsp&nbsp
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="wheat-free">
+	  			<label class="form-check-label" for="inlineCheckbox2">high-fiber</label>
+			</div> 
+
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="dairy-free">
+	  			<label class="form-check-label" for="inlineCheckbox1">high-protein</label>
+			</div>
+
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="dairy-free">
+	  			<label class="form-check-label" for="inlineCheckbox1">low-fat</label>
+			</div>
+
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="dairy-free">
+	  			<label class="form-check-label" for="inlineCheckbox1">low-potassium</label>
+			</div>
+
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="dairy-free">
+	  			<label class="form-check-label" for="inlineCheckbox1">vegan</label>
+			</div>
+
+			<div class="form-check form-check-inline">
+	  			<input class="form-check-input" type="checkbox" value="dairy-free">
+	  			<label class="form-check-label" for="inlineCheckbox1">No-oil-added</label>
+			</div>
+		</div>
+		  <br>
+		  <button class="btn btn-primary" id="option-submit" type="submit">Start random</button>
+		</form>
+
+	</div>
+ 	<div id="more-link">
+ 		<!-- https://codepen.io/anon/pen/qwpeVw -->
+ 		<!-- https://codepen.io/manelroig/pen/rJMVRO -->
+ 		<a href="#page2"><img src="arrow.png"></a>
+ 	</div>
+
+
+</div>
+
+<div id="page2">
+ 	<div id="section2">
+ 		More for you: 
+ 		<div class="container">
+  			<div class="row">
+   			 <div class="col-sm">
+     			 One of three columns
+    		</div>
+		    <div class="col-sm">
+		      One of three columns
+		    </div>
+		    <div class="col-sm">
+		      One of three columns
+		    </div>
+		  </div>
+		</div>
+		 	</div>
+		</div>
+
+</body>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	let words = [];
+	let pics = [];
+	let counter = 0;
+	let elem = document.getElementById("identity");
+	var inst = setInterval(change, 1000);
+
+	var endpoint = "https://api.edamam.com/search?q=" + "chinese+chicken" + "&app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&health=" + "alcohol-free&from=0&to=30";
+		ajax(endpoint,displayResults);
+
+	var endpoint2 = "https://api.edamam.com/search?q=" + "brunch" + "&app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&from=0&to=30";
+	ajax(endpoint2,show);
+
+	document.querySelector("#stop").onclick = function(){
+		// document.querySelector("#not-rolling").style.display = "none";
+		// document.querySelector("#rolling").style.display = "block";
+
+		clearInterval(inst);
+		document.querySelector("#stop").innerHTML = "Change one"
+		if (document.querySelector("#stop").innerHTML == "Change one") {
+			change();
+		}
+		
+	};
+
+	document.querySelector("#identity").onclick = function(){
+		window.location.href= "file:///Users/rachel/Desktop/What-to-eat/search.php?input="+this.innerHTML.trim();
+		// 		console.log("here");
+
+	};
+
+	function change(){
+		if (pics[counter] == "undefined"){
+		}
+		else {
+			elem.innerHTML = "   "+ words[counter];
+			document.querySelector("#main-pic").src = pics[counter];
+			//console.log(pics[counter]);
+
+		}
+  		counter++;
+  		if (counter >= words.length) {
+   	 	counter = 0;
+  		}
+	}
+
+	 document.querySelector("#option-form").onsubmit = function(){
+	 // 	let searchTermInput = document.querySelector("#search-id").value.trim();
+
+						
+
+		document.querySelector("#not-rolling").style.display = "none";
+		document.querySelector("#rolling").style.display = "block";
+		document.querySelector("#radio").style.display = "none";
+
+			return false;
+
+	 }
+
+	 function ajax(endpoint,display){
+	 	// Use AJAX to start communicating with iTunes Search API!
+			let xhr = new XMLHttpRequest();
+			// "opening" a new connection to talk to iTunes - 2 params: method, endpoint
+			xhr.open("GET", endpoint);
+			xhr.send();
+
+			// when some kind of response is given to us, run another function
+			xhr.onreadystatechange = function() {
+				if(this.readyState == this.DONE) {
+					// Received some kind of response
+					if(xhr.status == 200) {
+						// Got a succesful response
+						// Convert the responsText JSON string to JS objects
+						let responseObjects = JSON.parse(xhr.responseText);
+						display(responseObjects);
+
+					}
+					else {
+						// Got a response, but it's an error
+						console.log("Error!!!");
+						console.log(xhr.status);
+					}
+				}
+			}
+	 }
+	
+	function displayResults(results) {
+			console.log(results);
+			console.log(results.hits.length);
+			for (let i = 0; i < results.hits.length;i++){
+				words.push(results.hits[i].recipe.label);
+				pics.push(results.hits[i].recipe.image);
+
+			}
+
+	}
+
+	function show(results){
+		for (let i = 0; i < results.hits.length;i++){
+				let sec = document.createElement("div");
+		}
+	}
+
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</html>
