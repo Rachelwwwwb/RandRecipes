@@ -4,14 +4,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="common.css">
-<link href="https://fonts.googleapis.com/css?family=Arapey|Cinzel" rel="stylesheet">
-
-<link href="https://fonts.googleapis.com/css?family=PT+Sans+Caption" rel="stylesheet">
-
 <style type="text/css">
-	p,h1,h2,h3{
-		font-family: 'PT Sans Caption', sans-serif;
-	}
+
 	#rolling {
 		width: 100%;
 		margin-top: 5%;
@@ -115,14 +109,86 @@
 		margin-top: 10%;
 		margin-left:auto;
 		margin-right: auto;
-		border-style: solid;
-		border-radius: 50px; 
 	}
 
 	.col-sm {
-		border-style: solid;
-		border-radius: 50px; 
+		/*border-style: solid;*/
+		/*border-radius: 50px; */
 	}
+	.brunch-area {
+		display: flex;
+	}
+	.meal {
+		width: 20%;
+		/*/border-style: solid;*/
+		float: left;
+		margin:0;
+		height: 40%;
+		text-align: center;
+	}
+	.poster {
+		width: 80%;
+		margin-left: 10%;
+		margin-right: 10%;
+		border-radius: 20px;
+		padding-bottom: 10px;
+		cursor: pointer;
+	}
+
+	.captures {
+		font-size:15px;
+		cursor: pointer;
+	}
+	.captures:hover {
+		color:rgb(84,148,144);
+	}
+
+	#more {
+		width: 90%;
+		padding-left: 50%;
+		padding-bottom: 10%;
+	}
+
+	#header {
+		text-align: center;
+		line-height: 50px;
+		margin-bottom: 20px;
+		width: 90%;
+		margin-right: 5%;
+		margin-left: 5%;
+		color: black;
+
+	}
+	#brunch {
+		background-color: orange;
+		border-radius: 5px;
+		/*border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;*/
+		cursor: pointer;
+	}
+
+	#dinner {
+		background-color: #FAD7A0;
+		border-radius: 5px;
+		cursor: pointer;
+
+	}
+
+
+	@media(max-width: 991px){
+	.meal {
+		width: 30%;
+		margin-left:2%;
+	}
+	}
+
+	@media(max-width: 767px){
+	.meal {
+		width: 45%;
+		margin-left:2%;
+	}
+	}
+
 
 </style>
 
@@ -244,22 +310,27 @@
 
 <div id="page2">
  	<div id="section2">
- 		More for you: 
  		<div class="container">
-  			<div class="row">
-   			 <div class="col-sm">
-     			 One of three columns
-    		</div>
-		    <div class="col-sm">
-		      One of three columns
-		    </div>
-		    <div class="col-sm">
-		      One of three columns
-		    </div>
+ 			 <div id="more">More for you </div>
+  			<div class="row" id="header">
+	   			 <div class="col-sm" id="brunch">
+	     			 Brunch
+	    		</div>
+			    <div class="col-sm" id="dinner">
+			      Dinner
+			    </div>
+		  </div>
+
+		  <div id="brunch-area">
+
+		  </div>
+
+		  <div id="dinner-area">
+
 		  </div>
 		</div>
-		 	</div>
-		</div>
+	</div>
+</div>
 
 </body>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -269,13 +340,17 @@
 	let pics = [];
 	let counter = 0;
 	let elem = document.getElementById("identity");
-	var inst = setInterval(change, 1000);
+	var inst = setInterval(change, 100);
 
 	var endpoint = "https://api.edamam.com/search?q=" + "chinese+chicken" + "&app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&health=" + "alcohol-free&from=0&to=30";
-		ajax(endpoint,displayResults);
+	ajax(endpoint,displayResults);
 
-	var endpoint2 = "https://api.edamam.com/search?q=" + "brunch" + "&app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&from=0&to=30";
-	ajax(endpoint2,show);
+	var ran = Math.ceil(Math.random()*30+1);
+	var endpointBrunch = "https://api.edamam.com/search?q=brunch&app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&from="+ran+"&to="+(ran+30);
+	ajax(endpointBrunch,show);
+	var endpointDinner = "https://api.edamam.com/search?q=" + "fried" + "&app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&from=0&to=30";
+	ajax(endpointDinner,show);
+
 
 	document.querySelector("#stop").onclick = function(){
 		// document.querySelector("#not-rolling").style.display = "none";
@@ -295,7 +370,39 @@
 
 	};
 
-	function change(){
+	document.querySelector("#brunch").onclick = function(){
+		this.style.backgroundColor = "orange";
+		document.querySelector("#dinner-area").style.display = "none";
+		document.querySelector("#dinner").style.backgroundColor = "#FAD7A0";
+		document.querySelector("#brunch-area").style.display = "block";
+
+	}
+
+	document.querySelector("#dinner").onclick = function(){
+		this.style.backgroundColor = "orange";
+		document.querySelector("#brunch-area").style.display = "none";
+		document.querySelector("#brunch").style.backgroundColor = "#FAD7A0";
+		document.querySelector("#dinner-area").style.display = "block";
+
+	}
+
+
+
+	document.querySelector("#option-form").onsubmit = function(){
+	 // 	let searchTermInput = document.querySelector("#search-id").value.trim();
+
+						
+
+		document.querySelector("#not-rolling").style.display = "none";
+		document.querySelector("#rolling").style.display = "block";
+		document.querySelector("#radio").style.display = "none";
+
+			return false;
+
+	 }
+
+
+	 function change(){
 		if (pics[counter] == "undefined"){
 		}
 		else {
@@ -310,18 +417,6 @@
   		}
 	}
 
-	 document.querySelector("#option-form").onsubmit = function(){
-	 // 	let searchTermInput = document.querySelector("#search-id").value.trim();
-
-						
-
-		document.querySelector("#not-rolling").style.display = "none";
-		document.querySelector("#rolling").style.display = "block";
-		document.querySelector("#radio").style.display = "none";
-
-			return false;
-
-	 }
 
 	 function ajax(endpoint,display){
 	 	// Use AJAX to start communicating with iTunes Search API!
@@ -362,9 +457,46 @@
 	}
 
 	function show(results){
-		for (let i = 0; i < results.hits.length;i++){
-				let sec = document.createElement("div");
+		if (results.q == "brunch"){
+			var area = 	document.querySelector("#brunch-area");
 		}
+		else if (results.q == "fried"){
+			var area = 	document.querySelector("#dinner-area");
+		}
+			//var count = 0;
+			for (let i = 0; i < results.hits.length;i++){
+				/*
+				if (count % 3 == 0){
+					console.log("heyy");
+				}
+				count ++;*/
+				if (results.hits[i].recipe.image == "undefined"){
+				}
+				else{
+					let divElement = document.createElement("div");
+					//divElement.classList.add("col-sm");
+					divElement.classList.add("meal");
+					divElement.id = results.hits[i].recipe.uri.substring(51);
+					//http://www.edamam.com/ontologies/edamam.owl#recipe_aa2f033b5d5993bcf84959bca422377b
+
+					area.appendChild(divElement);
+
+					let imageElement = document.createElement("img");
+					if (results.hits[i].recipe.image != "undefined"){
+						imageElement.src = results.hits[i].recipe.image;
+						imageElement.classList.add("poster");
+					}
+
+					divElement.appendChild(imageElement);
+
+					let captionElement = document.createElement("h5");
+					captionElement.classList.add("captures");
+					captionElement.innerHTML = results.hits[i].recipe.label;
+					divElement.appendChild(captionElement);
+				}
+
+			}
+
 	}
 
 
