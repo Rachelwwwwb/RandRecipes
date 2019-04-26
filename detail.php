@@ -1,16 +1,14 @@
 
 <!-- https://api.edamam.com/search?app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_aa2f033b5d5993bcf84959bca422377b -->
+<?php
+
+?>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript">
-	//console.log($ .urlParam('id'));
 	$.ajax({
 			method:"GET",
-			url:"https://api.edamam.com/search?app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_aa2f033b5d5993bcf84959bca422377b"
-			/*data:{
-				term:searchTermInput,
-				limit:limitInput
-			}*/
+			url:"https://api.edamam.com/search?app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_"+"<?php echo $_GET["id"] ?>"
 			}).done(function(results){
 				console.log(results);
 				$("#name").html(results[0].label);
@@ -228,7 +226,7 @@
 		</div>
 
 		<div id="mainpic">
-			<img id="food-pic" src="image/main.jpg" alt="pikachu-Switch">
+			<img id="food-pic" src="image/main.jpg">
 		</div>
 	<div class="info">
 

@@ -5,8 +5,60 @@
 	<link rel="stylesheet" type="text/css" href="common.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style type="text/css">
+	#register {
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+    padding-top: 5%;
+	}
+  #overlay {
+    display:none;
+    height:110%;
+    width:100%;
+    position:absolute;
+    z-index:5;
+  }
+  #black-background {
+    position:absolute;
+    height:110%;
+    width:100%;
+    top:0;
+    left:0;
+    background-color: rgba(97,97,97,0.7);
+    z-index:6;
+  }
+  #box {
+    position: absolute;
+    z-index: 7;
+    height: 80%;
+    width: 70%;
+    background-color: rgb(255,255,255);
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    text-align: center;
 
- 
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family: 'PT Sans Caption', sans-serif;
+  }
+
+  #logo {
+    margin-top: 5%;
+    width: 100%;
+    font-size: 20px;
+    color: rgb(210,104,52);
+  }
+  #prompt {
+    padding-top: 10%;
+    padding-bottom: 7%;
+    font-size: 35px;
+  }
+  p {
+        color: gray;
+        line-height: 0.5;
+  }
   input {
     width: 80%;
     height: 50px;
@@ -65,7 +117,25 @@
 </style>
 </head>
 <body>
- 
+  <div id="overlay"></div>
+  <div id="black-background"></div>
+  <div id="box"> 
+    <div id="logo">RandRecipes</div>
+    <div id="prompt">Log in to unlock recipes</div>
+    <div id="question">
+
+
+      <form id="input" name="password" action="*.php" method="GET">
+        <input type="text" id="username" placeholder="username"></input>
+        <input type="text" id="password" placeholder="password"></input>
+        <br /><button class="button" type="submit">submit</button>
+      </form>
+
+    </div>
+
+
+  </div>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-orange">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

@@ -1,10 +1,14 @@
 <link href="https://fonts.googleapis.com/css?family=PT+Sans+Caption" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 
 	body,html{
 		padding: 0;
 		margin: 0;
 		scroll-behavior: smooth;
 
+	}
+	.margin-zero {
+    	margin-left: 0;
 	}
 	
 	#page1, #page2{
@@ -29,6 +33,15 @@
 		margin-left: 85%;
 	}
 
-	p,h1,h2,h3,h5{
+	#brand {
+		font-family: 'Russo One', sans-serif;
+	}
+	#not-rolling h2 {
+		font-family: 'Russo One', sans-serif;
+	}
+	p,h1,h2,h3,h5,div{
 		font-family: 'PT Sans Caption', sans-serif;
 	}
+
+
+

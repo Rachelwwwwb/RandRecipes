@@ -72,11 +72,11 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   }
 
-  #username {
+  #username-form {
     display: none;
   }
 
-  #password {
+  #password-form {
     display: none;
   }
   .button {
@@ -118,6 +118,9 @@
   opacity: 1;
   right: 0;
 }
+.container {
+  display: none;
+}
 
 </style>
 </head>
@@ -128,24 +131,37 @@
     <div id="logo">RandRecipes</div>
     <div id="prompt">Your recipes are waiting</div>
     <div id="question">
-      <form id="email" name="email">
+      <form id="email-form" name="email">
         <p>Please enter your email: </p><br />
-        <input type="email" placeholder="example@gamil.com"></input>
+        <input type="email" id="email" placeholder="example@gamil.com"></input>
+         <small style="color:red;" id="email-error" class="form-text"></small>
         <br /><button class="button" type="submit">submit</button>
       </form>
 
-      <form id="username" name="username">
+      <form id="username-form" name="username">
         <p>Great! Now pick a username: </p><br />
-        <input type="text" placeholder="Username"></input>
+        <input type="text" id="username" placeholder="Username"></input>
+        <small style="color:red;" id="username-error" class="form-text"></small>
         <br /><button class="button" type="submit">submit</button>
       </form>
 
-      <form id="password" name="password">
+      <form id="password-form" name="password">
         <p>Last step! Enter your password please</p><br />
-        <input type="text" placeholder="password"></input>
-        <input type="text" placeholder="Confirm password"></input>
+        <input type="text" id="password" placeholder="password"></input>
+        <input type="text" id="confirm" placeholder="Confirm password"></input>
         <br /><button class="button" type="submit">submit</button>
       </form>
+
+      <div class="container" id="final">
+        <div class="row">
+        <div class="col-12 col-md-6">
+          <a href="search.php" class="btn btn-primary btn-lg btn-block mt-4 mt-md-2" role="button">Search page</a>
+        </div>
+        <div class="col-12 col-md-6">
+          <a href="account.php" class="btn btn-primary btn-lg btn-block mt-4 mt-md-2" role="button">Account</a>
+        </div>
+      </div> <!-- .row -->
+  </div> <!-- .container -->
 
     </div>
 
@@ -174,11 +190,84 @@
 </nav>
 
   <script type="text/javascript">
-  document.querySelectorAll("input").oninput = function() {
-   
-    console.log("1");
-  }
+    document.querySelector("#email-form").onsubmit = function(){
+      let emailInput = document.querySelector("#email").value.trim();
+      if(/^$/.test(emailInput) == true){
+        document.querySelector("#email-error").innerHTML = "Cannot be empty";
+              return false;
+      }
+    
+      //else if(/\w{3,}@\w+\.(net|com|edu)/.test("emailInput") == false){
+       // document.querySelector("#email-error").innerHTML = "Invalid email";
+        //return false;
+      //}
+      else {
+        /* leave for backend
+        ajaxGet("register-confirm.php?email="+emailInput,function(results){
 
+        })
+        */
+        document.querySelector("#email-form").style.display = "none";
+        document.querySelector("#username-form").style.display = "block";
+
+      }
+      return false;
+
+    }
+
+
+      document.querySelector("#username-form").onsubmit = function(){
+      let usernameInput = document.querySelector("#username").value.trim();
+      console.log(usernameInput);
+        if(/^$/.test(usernameInput)){
+          document.querySelector("#username-error").innerHTML = "cannot be empty";
+          return false;
+        }
+        else{
+          document.querySelector("#username-form").style.display = "none";
+          document.querySelector("#password-form").style.display = "block";
+        }
+        /* leave for backend
+        ajaxGet("register-confirm.php?username="+usernameInput,function(results){
+
+        })
+        */
+            return false;
+    }
+
+    document.querySelector("#password-form").onsubmit = function(){
+      let usernameInput = document.querySelector("#username").value.trim();
+      
+        /* leave for backend
+        ajaxGet("register-confirm.php?username="+usernameInput,function(results){
+
+        })
+        */
+         document.querySelector("#password-form").style.display = "none";
+         document.querySelector("#prompt").innerHTML = "Register Successfully!"+"<br />";
+        document.querySelector("#final").style.display = "block";
+        return false;
+    }
+
+    function ajaxGet(endpointUrl, returnFunction){
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', endpointUrl, true);
+      xhr.onreadystatechange = function(){
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+          if (xhr.status == 200) {
+            returnFunction( xhr.responseText );
+
+            //convert JSON string into actual js object
+            returnFunction( JSON.parse(xhr.responseText) );
+
+          } else {
+            alert('AJAX Error.');
+            console.log(xhr.status);
+          }
+        }
+      }
+      xhr.send();
+    };
 
 
   </script>

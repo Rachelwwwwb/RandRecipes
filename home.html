@@ -5,7 +5,36 @@
 
 <link rel="stylesheet" type="text/css" href="common.css">
 <style type="text/css">
+	#overlay {
+		display:none;
+		height:100%;
+		width:100%;
+		position:absolute;
+		z-index:5;
+	}
+	#black-background {
+		position:absolute;
+		height:100%;
+		width:100%;
+		top:0;
+		left:0;
+		background-color: rgba(97,97,97,0.7);
+		z-index:6;
+	}
+	#ingredients {
+		position: absolute;
+		z-index: 7;
+		height: 100%;
+		width: 40%;
+		background-color: rgba(255,255,255,0.5);
+		margin-left: 30%;
+		margin-right: 30%;
+		padding-top: 10%;
+		padding-left: 5%;
+		padding-right: 5%;
+		font-family: 'PT Sans Caption', sans-serif;
 
+	}
 	#rolling {
 		width: 100%;
 		margin-top: 5%;
@@ -95,12 +124,16 @@
 	#identity {
 		cursor: pointer;
 	}
+	#identity:hover {
+		color:rgb(84,148,144);
+	}
 
 	#main-pic {
 		width: 25%;
 		margin-left: 32.5%;
 		margin-right: 32.5%;
 		padding-bottom: 20px;
+		cursor: pointer;
 	}
 
 	#section2 {
@@ -145,8 +178,11 @@
 
 	#more {
 		width: 90%;
-		padding-left: 50%;
-		padding-bottom: 10%;
+		padding-left: 5%;
+		padding-bottom: 20px;
+		font-family: 'PT Sans Caption', sans-serif;
+		font-size: 18px;
+
 	}
 
 	#header {
@@ -157,6 +193,8 @@
 		margin-right: 5%;
 		margin-left: 5%;
 		color: black;
+		font-family: 'PT Sans Caption', sans-serif;
+
 
 	}
 	#brunch {
@@ -187,6 +225,11 @@
 		width: 45%;
 		margin-left:2%;
 	}
+	#ingredients {
+		width: 100%;
+		margin:0;
+	}
+
 	}
 
 
@@ -197,21 +240,29 @@
 <!-- KEY: b5e7f5bbf288c60fa2f17db649d9ded0 -->
 <!-- "https://api.edamam.com/search?q=chicken&app_id=3e327f96&app_key=b5e7f5bbf288c60fa2f17db649d9ded0&from=0&to=3&calories=591-722&health=alcohol-free" -->
 <body>
+
+<div id="overlay">
+	<div id="black-background"></div>
+	<div id="ingredients"> </div>
+</div>
 <div id="page1">
 	<!-- header -->
 <nav class="navbar navbar-expand-lg navbar-light bg-orange">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a id="brand" class="navbar-brand" href="#">Navbar</a>
+  <a id="brand" class="navbar-brand" href="home.html">RandRecipes</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="margin-zero active">
+        <a class="nav-link" href="register.php">Register <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+      <li class="margin-zero active">
+        <a class="nav-link" href="login.php">Login <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="margin-zero active">
+        <a class="nav-link" href="register.html">About US <span class="sr-only">(current)</span></a>
       </li>
     </ul>
   </div>
@@ -219,7 +270,7 @@
 
 	<div id="first-page">
 		<div id="not-rolling">
-			<h2>I WHAT TO EAT</h2>
+			<h2>RandRecipes</h2>
 		</div>
 		<div id="rolling">
 			<h1>I want to eat</h1>
@@ -338,6 +389,9 @@
 <script type="text/javascript">
 	let words = [];
 	let pics = [];
+	let recipes = [];
+
+
 	let counter = 0;
 	let elem = document.getElementById("identity");
 	var inst = setInterval(change, 100);
@@ -363,6 +417,14 @@
 		}
 		
 	};
+
+	document.querySelector("#main-pic").onclick = function(){
+		document.querySelector("#overlay").style.display = "block";
+	}
+
+	document.querySelector("#overlay").onclick = function(){
+		this.style.display = "none";
+	}
 
 	document.querySelector("#identity").onclick = function(){
 		window.location.href= "file:///Users/rachel/Desktop/What-to-eat/search.php?input="+this.innerHTML.trim();
@@ -401,6 +463,14 @@
 
 	 }
 
+	$("#brunch-area").on("click",".meal",function(){
+		window.location.href = "detail.php?id="+$(this).children("img").attr("id");
+	});
+
+	$("#dinner-area").on("click",".meal",function(){
+		window.location.href = "detail.php?id="+$(this).children("img").attr("id");
+	});
+
 
 	 function change(){
 		if (pics[counter] == "undefined"){
@@ -408,8 +478,15 @@
 		else {
 			elem.innerHTML = "   "+ words[counter];
 			document.querySelector("#main-pic").src = pics[counter];
-			//console.log(pics[counter]);
-
+			document.querySelector("#ingredients").innerHTML = "";
+			for (var i = 0; i < 10; i++){
+				if (recipes[counter][i] != "undefined" && recipes[counter][i] != null && recipes[counter][i] != "null"){
+					document.querySelector("#ingredients").innerHTML += recipes[counter][i] + "<br />";
+					if (i == 9 && recipes[counter].length > 10){
+						document.querySelector("#ingredients").innerHTML += "and more...";
+					}
+				}
+			}
 		}
   		counter++;
   		if (counter >= words.length) {
@@ -451,7 +528,8 @@
 			for (let i = 0; i < results.hits.length;i++){
 				words.push(results.hits[i].recipe.label);
 				pics.push(results.hits[i].recipe.image);
-
+				//console.log(results.hits[i].recipe.ingredientLines);
+				recipes.push(results.hits[i].recipe.ingredientLines);
 			}
 
 	}
@@ -465,18 +543,13 @@
 		}
 			//var count = 0;
 			for (let i = 0; i < results.hits.length;i++){
-				/*
-				if (count % 3 == 0){
-					console.log("heyy");
-				}
-				count ++;*/
+
 				if (results.hits[i].recipe.image == "undefined"){
 				}
 				else{
 					let divElement = document.createElement("div");
 					//divElement.classList.add("col-sm");
 					divElement.classList.add("meal");
-					divElement.id = results.hits[i].recipe.uri.substring(51);
 					//http://www.edamam.com/ontologies/edamam.owl#recipe_aa2f033b5d5993bcf84959bca422377b
 
 					area.appendChild(divElement);
@@ -484,6 +557,7 @@
 					let imageElement = document.createElement("img");
 					if (results.hits[i].recipe.image != "undefined"){
 						imageElement.src = results.hits[i].recipe.image;
+						imageElement.id = results.hits[i].recipe.uri.substring(51);
 						imageElement.classList.add("poster");
 					}
 
@@ -491,13 +565,16 @@
 
 					let captionElement = document.createElement("h5");
 					captionElement.classList.add("captures");
-					captionElement.innerHTML = results.hits[i].recipe.label;
+					captionElement.innerHTML = results.hits[i].recipe.label
+
 					divElement.appendChild(captionElement);
 				}
 
 			}
 
 	}
+
+
 
 
 </script>
