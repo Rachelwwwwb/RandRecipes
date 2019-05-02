@@ -1,3 +1,51 @@
+<?php
+require 'config.php';
+
+   $_SESSION['logged_in'] = false;
+  if ( isset($_POST['email']) && isset($_POST['email']) ) {
+    //make sure it's not empty
+    if ( empty($_POST['email']) || empty($_POST['email']) ) {
+      $error = "Please enter email and password.";
+
+    }
+    else {
+
+      $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+      if($mysqli->connect_errno) {
+        echo $mysqli->connect_error;
+        exit();
+      }
+
+      $passwordInput = hash('sha256', $_POST['password']);
+      $sql = "SELECT * FROM user
+            WHERE userEmail = '" . $_POST['email'] . "' AND userPassword = '" . $passwordInput . "';";
+
+      
+      $results = $mysqli->query($sql);
+      if ($results->num_rows > 0){
+        //if the password is found
+        $_SESSION['logged_in'] = true;
+        $_SESSION['email'] = $_POST['email'];
+      }
+
+      if(!$results) {
+        echo $mysqli->error;
+        exit();
+      }
+
+      if($results->num_rows > 0) {
+        
+      
+      }
+      else {
+        $error = "Invalid email or password.";
+      }
+    } 
+  }
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,6 +161,18 @@
 .container {
   display: none;
 }
+#account {
+  display: none;
+}
+  #brand {
+    padding-right: 70%;
+    font-family: "Comic Sans MS";
+  }
+  #not-rolling h2 {
+    font-family: "Comic Sans MS";
+    font-size: 50px;
+    font-weight: 1px;
+  }
 
 </style>
 </head>
@@ -124,11 +184,23 @@
     <div id="prompt">Log in to unlock recipes</div>
     <div id="question">
 
+      <form id="input" name="password" action="login.php" method="POST">
+        <input type="text" id="email" name="email" placeholder="email"></input>
+        <input type="text" id="password" name="password" placeholder="password"></input>
 
-      <form id="input" name="password" action="*.php" method="GET">
-        <input type="text" id="username" placeholder="username"></input>
-        <input type="text" id="password" placeholder="password"></input>
-        <br /><button class="button" type="submit">submit</button>
+        <br />
+        <?php
+            if ( isset($error) && !empty($error) ) {
+              echo $error;
+            }
+        ?>
+        <br />
+        <br />
+      <button class="button" type="submit">submit</button>
+      </form>
+      <form id="account" method="POST" action="account.php">
+        <input type="hidden" name="email" value="<?php echo $_POST['email'] ?>"/>
+        <button class="button" type="submit">My account page</button>
       </form>
 
     </div>
@@ -140,7 +212,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a id="brand" class="navbar-brand" href="#">RandRecipes</a>
+  <a id="brand" class="navbar-brand" href="home.html">Rand Recipes</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -159,37 +231,12 @@
 
   <script type="text/javascript">
 
-    document.querySelector("#input").onsubmit = function(){
-      
-        /* leave for backend
-        ajaxGet("register-confirm.php?username="+usernameInput,function(results){
-
-        })
-        */
-        this.style.display = "none";
+  <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) : ?>
+       document.querySelector("#input").style.display = "none";
+        document.querySelector("#account").style.display = "block";
         document.querySelector("#prompt").innerHTML = "Succuessfully logged in!";
-        return false;
-    }
+  <?php endif; ?>
 
-    function ajaxGet(endpointUrl, returnFunction){
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', endpointUrl, true);
-      xhr.onreadystatechange = function(){
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-          if (xhr.status == 200) {
-            returnFunction( xhr.responseText );
-
-            //convert JSON string into actual js object
-            returnFunction( JSON.parse(xhr.responseText) );
-
-          } else {
-            alert('AJAX Error.');
-            console.log(xhr.status);
-          }
-        }
-      }
-      xhr.send();
-    };
 
 
   </script>

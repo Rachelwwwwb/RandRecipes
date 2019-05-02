@@ -263,19 +263,23 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a id="brand" class="navbar-brand" href="home.html">Rand Recipes</a>
+  <a id="brand" class="navbar-brand" href="index.php">Rand Recipes</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="margin-zero active">
-        <a class="nav-link" href="register.php">Register <span class="sr-only">(current)</span></a>
+      	<?php if ( isset($_SESSION['logged_in']) && $_SESSION['logged_in'] ) : ?>
+        	<a class="nav-link" href="account.php">Account <span class="sr-only">(current)</span></a>
+      	<?php else : ?>
+        	<a class="nav-link" href="register.php">Register <span class="sr-only">(current)</span></a>
+    	<?php endif ; ?>
       </li>
       <li class="margin-zero active">
       	<?php if ( isset($_SESSION['logged_in']) && $_SESSION['logged_in'] ) : ?>
-      	<a class="nav-link" href="account.php">Account <span class="sr-only">(current)</span></a>
+      		<a class="nav-link" href="logout.php">Logout <span class="sr-only">(current)</span></a>
 
       	<?php else : ?>
-        <a class="nav-link" href="login.php">Login <span class="sr-only">(current)</span></a>
+        	<a class="nav-link" href="login.php">Login <span class="sr-only">(current)</span></a>
 
         <?php endif; ?>
       </li>

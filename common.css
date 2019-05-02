@@ -1,5 +1,4 @@
 <link href="https://fonts.googleapis.com/css?family=PT+Sans+Caption" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 
 	body,html{
 		padding: 0;
@@ -23,6 +22,7 @@
 	
 	#brand {
 		padding-right: 70%;
+		font-family: "Matilda";
 	}
 
 	.navbar-toggler{
@@ -32,12 +32,8 @@
 	.nav-item{
 		margin-left: 85%;
 	}
-
-	#brand {
-		font-family: 'Russo One', sans-serif;
-	}
 	#not-rolling h2 {
-		font-family: 'Russo One', sans-serif;
+		font-family: 'Matilda';
 	}
 	p,h1,h2,h3,h5,div{
 		font-family: 'PT Sans Caption', sans-serif;

@@ -30,13 +30,13 @@
 
 				}
 				
-				$("#Nutrition").append("<h3>Fat</h3><h5>"+results[0].digest[0].daily+"&nbsp&nbsp"+results[0].digest[0].unit+"</h5>");
+				$("#Nutrition").append("<h5>Fat</h5><h6 style='color:gray;'>"+results[0].digest[0].daily+"&nbsp&nbsp"+results[0].digest[0].unit+"</h6>");
 
-				$("#Nutrition").append("<h3>Sodium</h3><h5>"+results[0].digest[4].daily+"&nbsp&nbsp"+results[0].digest[4].unit+"</h5>");
+				$("#Nutrition").append("<h5>Sodium</h5><h6 style='color:gray;'>"+results[0].digest[4].daily+"&nbsp&nbsp"+results[0].digest[4].unit+"</h6>");
 
-				$("#Nutrition").append("<h3>Fat</h3><h5>"+results[0].digest[0].daily+"&nbsp&nbsp"+results[0].digest[0].unit+"</h5>");
+				$("#Nutrition").append("<h5>Fat</h5><h6 style='color:gray;'>"+results[0].digest[0].daily+"&nbsp&nbsp"+results[0].digest[0].unit+"</h6>");
 				
-				$("#Nutrition").append("<h3>Vitamin C</h3><h5>"+results[0].digest[12].daily+"&nbsp&nbsp"+results[0].digest[12].unit+"</h5>");
+				$("#Nutrition").append("<h5>Vitamin C</h5><h6 style='color:gray;'>"+results[0].digest[12].daily+"&nbsp&nbsp"+results[0].digest[12].unit+"</h6>");
 
 				
 
@@ -124,13 +124,28 @@
 		padding-bottom: 5px;
 	}
 
+	#addComment {
+		width: 80%;
+		height: 70px;
+		padding-left: 10px;
+		margin-bottom: 10px;
+	}
+	#brand {
+		padding-right: 70%;
+		font-family: "Comic Sans MS";
+	}
+	#not-rolling h2 {
+		font-family: "Comic Sans MS";
+		font-size: 50px;
+		font-weight: 1px;
+	}
+
 	@media(max-width: 991px){
 		#brand {
 			display: none;
 		}
 		.one-summary{
 			width: 30%;
-			background-color: red;
 		}
 		#last-summary{
 		float: left;
@@ -146,7 +161,6 @@
 		}
 		.one-summary{
 			width: 30%;
-			background-color: yellow;
 		}
 		#last-summary{
 			float: left;
@@ -183,7 +197,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a id="brand" class="navbar-brand" href="home.html">RandRecipes</a>
+  <a id="brand" class="navbar-brand" href="home.html">Rand Recipes</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -194,7 +208,7 @@
         <a class="nav-link" href="login.php">Login <span class="sr-only">(current)</span></a>
       </li>
       <li class="margin-zero active">
-        <a class="nav-link" href="register.html">About US <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="register.html">Search <span class="sr-only">(current)</span></a>
       </li>
     </ul>
   </div>
@@ -245,6 +259,18 @@
 			<hr>
 			<div id="tags">
 				<h3> Health Tags</h3>
+			</div>
+			<hr>
+			<div id="comment">
+				<h3> Comment</h3>
+				<p>Trojan: The recipe is too hard to follow.</p>
+				<p>Yo: Added homemade whipped cream on top to make it better!</p>
+				<p>Joann: it's a winner!! will be making it for Easter</p>
+				<form method="GET" action="comment.php">
+					<input type="text" id="addComment">
+					<br />
+					<input type="submit" placeholder="submit">
+				</form>
 			</div>
 
 		</div>

@@ -1,3 +1,48 @@
+<?php
+  require 'config.php';
+
+  if ( isset($_POST['email']) && isset($_POST['email']) ) {
+    //make sure it's not empty
+    if ( empty($_POST['email']) || empty($_POST['email']) ) {
+      $error = "Please enter username and password.";
+    }
+    else {
+      $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+      if($mysqli->connect_errno) {
+        echo $mysqli->connect_error;
+        exit();
+      }
+
+      $email = $_POST['email'];
+      //$passwordInput = hash('sha256', $_POST['password']);
+      $sql = "SELECT * FROM user
+            WHERE userEmail = '" . $_POST['email'] . "';";
+
+      $results = $mysqli->query($sql);
+      if ($results->num_rows > 0){
+        //if the email is found
+        $errorEmail = "email already exists";
+      }
+      else{
+        $emailSet = true;
+      }
+
+      if ( isset($username) ) {
+           echo "<hr>". $username."<hr>";
+      }
+
+      if(!$results) {
+        echo $mysqli->error;
+        exit();
+      }
+
+    } 
+  }
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +62,15 @@
     width:100%;
     position:absolute;
     z-index:5;
+  }
+  #brand {
+    padding-right: 70%;
+    font-family: "Comic Sans MS";
+  }
+  #not-rolling h2 {
+    font-family: "Comic Sans MS";
+    font-size: 50px;
+    font-weight: 1px;
   }
   #black-background {
     position:absolute;
@@ -121,6 +175,9 @@
 .container {
   display: none;
 }
+#account {
+  width: 100%;
+}
 
 </style>
 </head>
@@ -128,40 +185,38 @@
   <div id="overlay"></div>
   <div id="black-background"></div>
   <div id="box"> 
-    <div id="logo">RandRecipes</div>
+    <div id="logo">Rand Recipes</div>
     <div id="prompt">Your recipes are waiting</div>
     <div id="question">
-      <form id="email-form" name="email">
+      <form id="email-form" action="register.php" method="POST">
         <p>Please enter your email: </p><br />
-        <input type="email" id="email" placeholder="example@gamil.com"></input>
+        <input type="email" id="email" name="email" placeholder="example@gamil.com"></input>
          <small style="color:red;" id="email-error" class="form-text"></small>
-        <br /><button class="button" type="submit">submit</button>
+        <br />
+        <?php
+            if ( isset($errorEmail) && !empty($errorEmail) ) {
+              echo $errorEmail;
+            }
+        ?>
+         <br />
+        <button class="button" type="submit">submit</button>
       </form>
 
-      <form id="username-form" name="username">
+      <form id="username-form" action="register.php" method="POST">
         <p>Great! Now pick a username: </p><br />
-        <input type="text" id="username" placeholder="Username"></input>
+        <input type="text" id="username" name="username" placeholder="Username"></input>
         <small style="color:red;" id="username-error" class="form-text"></small>
         <br /><button class="button" type="submit">submit</button>
       </form>
 
-      <form id="password-form" name="password">
+      <form id="password-form" action="account.php" method="POST">
         <p>Last step! Enter your password please</p><br />
-        <input type="text" id="password" placeholder="password"></input>
+        <input type="text" id="password" name="password" placeholder="password"></input>
         <input type="text" id="confirm" placeholder="Confirm password"></input>
+        <input type="hidden" name="email" class="hiddenField" value="<?php echo $_POST['email'] ?>"/>
+        <input type="hidden" name="username" id="passusername" class="hiddenField" value="" />
         <br /><button class="button" type="submit">submit</button>
       </form>
-
-      <div class="container" id="final">
-        <div class="row">
-        <div class="col-12 col-md-6">
-          <a href="search.php" class="btn btn-primary btn-lg btn-block mt-4 mt-md-2" role="button">Search page</a>
-        </div>
-        <div class="col-12 col-md-6">
-          <a href="account.php" class="btn btn-primary btn-lg btn-block mt-4 mt-md-2" role="button">Account</a>
-        </div>
-      </div> <!-- .row -->
-  </div> <!-- .container -->
 
     </div>
 
@@ -177,10 +232,10 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="margin-zero active">
-        <a class="nav-link" href="register.html">Register <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="register.php">Register <span class="sr-only">(current)</span></a>
       </li>
       <li class="margin-zero active">
-        <a class="nav-link" href="register.html">Login <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="login.php">Login <span class="sr-only">(current)</span></a>
       </li>
       <li class="margin-zero active">
         <a class="nav-link" href="register.html">About US <span class="sr-only">(current)</span></a>
@@ -190,29 +245,29 @@
 </nav>
 
   <script type="text/javascript">
+    <?php if(isset($errorEmail) && !empty($errorEmail)) : ?>
+      document.querySelector("#email-error").innerHTML = <?php echo $errorEmail ?>;
+    <?php endif; ?>
+
+    <?php if(isset($emailSet) && !empty($emailSet)) : ?>
+        document.querySelector("#email-form").style.display = "none";
+        document.querySelector("#username-form").style.display = "block";
+    <?php endif; ?>
+
     document.querySelector("#email-form").onsubmit = function(){
       let emailInput = document.querySelector("#email").value.trim();
       if(/^$/.test(emailInput) == true){
         document.querySelector("#email-error").innerHTML = "Cannot be empty";
               return false;
       }
-    
       //else if(/\w{3,}@\w+\.(net|com|edu)/.test("emailInput") == false){
        // document.querySelector("#email-error").innerHTML = "Invalid email";
         //return false;
       //}
       else {
-        /* leave for backend
-        ajaxGet("register-confirm.php?email="+emailInput,function(results){
-
-        })
-        */
-        document.querySelector("#email-form").style.display = "none";
-        document.querySelector("#username-form").style.display = "block";
-
+ 
+        
       }
-      return false;
-
     }
 
 
@@ -226,48 +281,12 @@
         else{
           document.querySelector("#username-form").style.display = "none";
           document.querySelector("#password-form").style.display = "block";
-        }
-        /* leave for backend
-        ajaxGet("register-confirm.php?username="+usernameInput,function(results){
+          document.querySelector("#passusername").value = usernameInput;
 
-        })
-        */
+        }
             return false;
     }
 
-    document.querySelector("#password-form").onsubmit = function(){
-      let usernameInput = document.querySelector("#username").value.trim();
-      
-        /* leave for backend
-        ajaxGet("register-confirm.php?username="+usernameInput,function(results){
-
-        })
-        */
-         document.querySelector("#password-form").style.display = "none";
-         document.querySelector("#prompt").innerHTML = "Register Successfully!"+"<br />";
-        document.querySelector("#final").style.display = "block";
-        return false;
-    }
-
-    function ajaxGet(endpointUrl, returnFunction){
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', endpointUrl, true);
-      xhr.onreadystatechange = function(){
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-          if (xhr.status == 200) {
-            returnFunction( xhr.responseText );
-
-            //convert JSON string into actual js object
-            returnFunction( JSON.parse(xhr.responseText) );
-
-          } else {
-            alert('AJAX Error.');
-            console.log(xhr.status);
-          }
-        }
-      }
-      xhr.send();
-    };
 
 
   </script>
